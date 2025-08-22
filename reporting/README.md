@@ -7,7 +7,6 @@ How it works
 - Connects to the `core/db.sqlite3` file by default.
 
 Endpoints
-- GET /health - simple liveness
 - GET /farms/{farm_id}/summary - returns number of farmers, cows, and total milk produced
 - GET /milk - query by farm_id, farmer_id, start_date, end_date
 - GET /activities/recent - returns recent activities

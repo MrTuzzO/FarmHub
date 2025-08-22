@@ -15,11 +15,6 @@ engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 app = FastAPI(title='FarmHub Reporting')
 
 
-@app.get('/health')
-def health():
-    return {'status': 'ok'}
-
-
 @app.get('/farms/{farm_id}/summary')
 def farm_summary(farm_id: int):
     with Session(engine) as session:

@@ -11,9 +11,7 @@ class MilkRecordAdmin(admin.ModelAdmin):
     date_hierarchy = 'date'
     
     fieldsets = (
-        ('Milk Record', {
-            'fields': ('cow', 'date', 'quantity_liters', 'recorded_by')
-        }),
+        ('Milk Record', { 'fields': ('cow', 'date', 'quantity_liters', 'recorded_by')}),
     )
     
     def farm_name(self, obj):

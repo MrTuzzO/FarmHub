@@ -12,12 +12,6 @@ class CowInline(admin.TabularInline):
     readonly_fields = ()
 
 
-class MilkRecordInline(admin.TabularInline):
-    model = MilkRecord
-    extra = 0
-    fields = ('cow', 'date', 'quantity_liters', 'recorded_by')
-    readonly_fields = ('recorded_by',)
-
 
 @admin.register(Farm)
 class FarmAdmin(admin.ModelAdmin):

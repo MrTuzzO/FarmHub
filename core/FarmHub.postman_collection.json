@@ -1,0 +1,537 @@
+{
+    "info": {
+        "name": "FarmHub Core API",
+        "description": "Complete API collection for FarmHub farm management platform",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:8000",
+            "type": "string"
+        },
+        {
+            "key": "token",
+            "value": "",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "Get Token",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "if (pm.response.code === 200) {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.collectionVariables.set('token', response.token);",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"superadmin\",\n    \"password\": \"password\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/token/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "token",
+                                ""
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Get Current User",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/users/me/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "users",
+                                "me",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "List Users",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/users/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "users",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create User (SuperAdmin only)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"agent2\",\n    \"password\": \"password\",\n    \"email\": \"agent2@example.com\",\n    \"first_name\": \"Agent\",\n    \"last_name\": \"Two\",\n    \"role\": \"agent\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/users/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "users",
+                                ""
+                            ]
+                        }
+                    }
+                }                
+            ]
+        },
+        {
+            "name": "Farms",
+            "item": [
+                {
+                    "name": "List Farms",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/farms/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "farms",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Farm",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Blue Farm\",\n    \"location\": \"Mountain Valley\",\n    \"agent\": 2\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/farms/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "farms",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Farm Details",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/farms/1/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "farms",
+                                "1",
+                                ""
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Cows",
+            "item": [
+                {
+                    "name": "List Cows",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/cows/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "cows",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Enroll Cow",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"tag\": \"COW-003\",\n    \"breed\": \"Holstein\",\n    \"farm\": 1,\n    \"dob\": \"2023-04-01\",\n    \"notes\": \"Healthy cow\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/cows/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "cows",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Cow Details",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/cows/1/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "cows",
+                                "1",
+                                ""
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Activities",
+            "item": [
+                {
+                    "name": "List Activities",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/activities/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "activities",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Log Activity",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"cow\": 1,\n    \"activity_type\": \"vaccination\",\n    \"notes\": \"Annual vaccination completed\",\n    \"date\": \"2025-08-22\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/activities/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "activities",
+                                ""
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Milk Records",
+            "item": [
+                {
+                    "name": "List Milk Records",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/milk/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "milk",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Record Milk Production",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"cow\": 1,\n    \"date\": \"2025-08-22\",\n    \"quantity_liters\": \"15.5\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/milk/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "milk",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Aggregate Milk by Date Range",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/milk/aggregate/?start=2025-08-01&end=2025-08-31",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "milk",
+                                "aggregate",
+                                ""
+                            ],
+                            "query": [
+                                {
+                                    "key": "start",
+                                    "value": "2025-08-01"
+                                },
+                                {
+                                    "key": "end",
+                                    "value": "2025-08-31"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Aggregate Milk by Farm",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/milk/by_farm/?start=2025-08-01&end=2025-08-31",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "milk",
+                                "by_farm",
+                                ""
+                            ],
+                            "query": [
+                                {
+                                    "key": "start",
+                                    "value": "2025-08-01"
+                                },
+                                {
+                                    "key": "end",
+                                    "value": "2025-08-31"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Aggregate Milk by Farmer",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/milk/by_farmer/?start=2025-08-01&end=2025-08-31",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "milk",
+                                "by_farmer",
+                                ""
+                            ],
+                            "query": [
+                                {
+                                    "key": "start",
+                                    "value": "2025-08-01"
+                                },
+                                {
+                                    "key": "end",
+                                    "value": "2025-08-31"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

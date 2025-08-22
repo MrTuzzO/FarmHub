@@ -1,0 +1,6 @@
+core/.idea/
+core/.venv/
+core/__pycache__/
+reporting/.idea/
+reporting/.venv/
+reporting/__pycache__/

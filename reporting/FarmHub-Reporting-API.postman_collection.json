@@ -7,30 +7,6 @@
     },
     "item": [
         {
-            "name": "Health Check",
-            "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                    "raw": "{{base_url}}/health",
-                    "host": [
-                        "{{base_url}}"
-                    ],
-                    "path": [
-                        "health"
-                    ]
-                }
-            },
-            "response": [
-                {
-                    "name": "Success",
-                    "status": "OK",
-                    "code": 200,
-                    "body": "{\n  \"status\": \"ok\"\n}"
-                }
-            ]
-        },
-        {
             "name": "Farm Summary",
             "request": {
                 "method": "GET",
